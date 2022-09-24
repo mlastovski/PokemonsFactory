@@ -51,7 +51,7 @@ const config: HardhatUserConfig = {
     hardhat: {
       forking: {
         url: process.env.ALCHEMY_MUMBAI as string,
-        enabled: true,
+        enabled: false,
       }
     },
 

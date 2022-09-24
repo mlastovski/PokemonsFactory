@@ -90,7 +90,7 @@ contract PokemonsFactory is AccessControl, VRFConsumerBaseV2 {
         address to = requestToSender[requestId];
         uint256 id = (randomWords[0] % 9) + 1;
 
-        pokemons.mintPokemon(to, id, 1);
+        pokemons.mintPokemon(to, id);
 
         emit ReceivedRandomness(requestId, id, to);
     }
@@ -106,7 +106,7 @@ contract PokemonsFactory is AccessControl, VRFConsumerBaseV2 {
     function getStone(uint256 id) external {
         require(id > 0 && id <= 4, "Wrong id");
 
-        stones.mintStone(msg.sender, id, 1);
+        stones.mintStone(msg.sender, id);
     }
 
     function evolvePokemon() external {
