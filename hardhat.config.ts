@@ -50,9 +50,15 @@ const config: HardhatUserConfig = {
 
     hardhat: {
       forking: {
-        url: process.env.ALCHEMY_URL as string,
+        url: process.env.ALCHEMY_MUMBAI as string,
         enabled: true,
       }
+    },
+
+    matic: {
+      url: process.env.ALCHEMY_MUMBAI || "",
+      accounts:
+        process.env.MNEMONIC !== undefined ? [process.env.MNEMONIC] : [],
     },
 
     bsc: {

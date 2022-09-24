@@ -1,0 +1,13 @@
+{
+    "description": "Magic stone used to perform an evolution from Ninetales to Staryu",
+    "external_url": "https://gateway.pinata.cloud/ipfs/QmTbwEuRL528HcZ271WEo31Wkx4tNqiqscLiCJ9m8UcUfk/ice.png",
+    "image": "https://gateway.pinata.cloud/ipfs/QmTbwEuRL528HcZ271WEo31Wkx4tNqiqscLiCJ9m8UcUfk/ice.png",
+    "name": "Ice stone",
+    "attributes": [
+        {
+            "display_type": "number",
+            "trait_type": "Magic",
+            "value": 101
+        }
+    ]
+}

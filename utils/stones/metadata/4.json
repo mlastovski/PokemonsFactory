@@ -1,0 +1,13 @@
+{
+    "description": "Magic stone used to perform an evolution from Staryu to Starmie",
+    "external_url": "https://gateway.pinata.cloud/ipfs/QmTbwEuRL528HcZ271WEo31Wkx4tNqiqscLiCJ9m8UcUfk/fire.png",
+    "image": "https://gateway.pinata.cloud/ipfs/QmTbwEuRL528HcZ271WEo31Wkx4tNqiqscLiCJ9m8UcUfk/fire.png",
+    "name": "Fire stone",
+    "attributes": [
+        {
+            "display_type": "number",
+            "trait_type": "Magic",
+            "value": 103
+        }
+    ]
+}

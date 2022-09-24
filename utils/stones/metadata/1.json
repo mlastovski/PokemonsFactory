@@ -1,0 +1,13 @@
+{
+    "description": "Magic stone used to perform an evolution from Vulpix to Bellossom",
+    "external_url": "https://gateway.pinata.cloud/ipfs/QmTbwEuRL528HcZ271WEo31Wkx4tNqiqscLiCJ9m8UcUfk/thunder.png",
+    "image": "https://gateway.pinata.cloud/ipfs/QmTbwEuRL528HcZ271WEo31Wkx4tNqiqscLiCJ9m8UcUfk/thunder.png",
+    "name": "Thunder stone",
+    "attributes": [
+        {
+            "display_type": "number",
+            "trait_type": "Magic",
+            "value": 100
+        }
+    ]
+}

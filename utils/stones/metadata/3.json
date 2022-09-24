@@ -1,0 +1,13 @@
+{
+    "description": "Magic stone used to perform an evolution from Gloom to Vileplume",
+    "external_url": "https://gateway.pinata.cloud/ipfs/QmTbwEuRL528HcZ271WEo31Wkx4tNqiqscLiCJ9m8UcUfk/moon.png",
+    "image": "https://gateway.pinata.cloud/ipfs/QmTbwEuRL528HcZ271WEo31Wkx4tNqiqscLiCJ9m8UcUfk/moon.png",
+    "name": "Moon stone",
+    "attributes": [
+        {
+            "display_type": "number",
+            "trait_type": "Magic",
+            "value": 102
+        }
+    ]
+}

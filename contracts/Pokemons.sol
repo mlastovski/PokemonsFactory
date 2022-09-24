@@ -6,22 +6,32 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract Stones is ERC1155, AccessControl {
+contract Pokemons is ERC1155, AccessControl {
     bytes32 public constant MANIPULATOR_ROLE = keccak256("MANIPULATOR_ROLE");
 
     string public ipfsLocation;
 
-    string public name = "Stones";
+    string public name = "Pokemons";
 
-    string public symbol = "STNS";
+    string public symbol = "PKMNS";
 
-    uint256 public constant THUNDER = 1;
+    uint256 public constant PIKACHU = 1;
 
-    uint256 public constant ICE = 2;
+    uint256 public constant RAICHU = 2;
 
-    uint256 public constant MOON = 3;
+    uint256 public constant NINETALES = 3;
 
-    uint256 public constant FIRE = 4;
+    uint256 public constant VULPIX = 4;
+
+    uint256 public constant BELLOSSOM = 5;
+
+    uint256 public constant GLOOM = 6;
+
+    uint256 public constant VILEPLUME = 7;
+
+    uint256 public constant STARMIE = 8;
+
+    uint256 public constant STARYU = 9;
 
     constructor(
         string memory _ipfsLocation
@@ -35,7 +45,7 @@ contract Stones is ERC1155, AccessControl {
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
 
-    function mintStone(
+    function mintPokemon(
         address to, 
         uint256 id
     ) 
@@ -45,7 +55,7 @@ contract Stones is ERC1155, AccessControl {
         _mint(to, id, 1, "");
     }
 
-    function burnStone(
+    function burnPokemon(
         address from, 
         uint256 id
     ) 

@@ -1,0 +1,23 @@
+{
+    "description": "Starmie",
+    "external_url": "https://gateway.pinata.cloud/ipfs/QmamCFY8xh82qzpmkxyhN1daCpKdhEGE1YzA9Pc2HmWBi6/starmie.png",
+    "image": "https://gateway.pinata.cloud/ipfs/QmamCFY8xh82qzpmkxyhN1daCpKdhEGE1YzA9Pc2HmWBi6/starmie.png",
+    "name": "Starmie",
+    "attributes": [
+        {
+            "display_type": "number",
+            "trait_type": "Attack",
+            "value": 128
+        },
+        {
+            "display_type": "number",
+            "trait_type": "Armor", 
+            "value": 10
+        }, 
+        {
+            "display_type": "number",
+            "trait_type": "Speed", 
+            "value": 20
+        }
+    ]
+}
