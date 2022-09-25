@@ -24,7 +24,6 @@ contract PokemonsFactory is AccessControl, VRFConsumerBaseV2 {
     uint16 requestConfirmations = 3;
     uint32 numWords = 1;
 
-    // mapping(uint256 => uint256) requestToPokemonId;
     mapping(uint256 => address) requestToSender;
 
     event RequestedRandomness(

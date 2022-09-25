@@ -91,4 +91,32 @@ describe("PokemonsFactory", function () {
         .to.be.revertedWith("Wrong id");
     });
   });
+
+  describe("getRandomPokemon", function () {
+    it("Should mint a random Pokemon to alice properly", async function () {
+      const tx = await pokemonsFactory.connect(alice).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+
+      for (let id = 1; id < 10; id++) {
+        const balance = await pokemons.balanceOf(alice.address, id);
+        console.log(balance);
+      };
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+
+      for (let id = 1; id < 10; id++) {
+        const balance = await pokemons.balanceOf(bob.address, id);
+        console.log(balance);
+      };
+    });
+  });
 });
