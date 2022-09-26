@@ -50,13 +50,13 @@ contract Pokemons is ERC1155, AccessControl {
 
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
 
-        modifyEvolution(PIKACHU, RAICHU, 0, 20);
-        modifyEvolution(RAICHU, NINETALES, 0, 40);
+        modifyEvolution(PIKACHU, RAICHU, 0, 20 * 1e18);
+        modifyEvolution(RAICHU, NINETALES, 0, 40 * 1e18);
         modifyEvolution(NINETALES, STARYU, 2, 1);
         modifyEvolution(STARYU, STARMIE, 4, 1);
 
         modifyEvolution(VULPIX, BELLOSSOM, 1, 1);
-        modifyEvolution(BELLOSSOM, GLOOM, 0, 36);
+        modifyEvolution(BELLOSSOM, GLOOM, 0, 36 * 1e18);
         modifyEvolution(GLOOM, VILEPLUME, 3, 1);
         modifyEvolution(GLOOM, STARMIE, 4, 1);
     }
@@ -71,7 +71,7 @@ contract Pokemons is ERC1155, AccessControl {
     {
         require(
             evolutionAvailable[pokemonId][assetId] == true, 
-            "No available evolutions"
+            "Pokemons: no available evolutions"
         );
 
         if (assetId == 0) {
@@ -121,6 +121,8 @@ contract Pokemons is ERC1155, AccessControl {
         } else if (assetId == 4) {
             fireEvolutions[currentPokemonId] = newPokemonId;
         }
+
+        evolutionAvailable[currentPokemonId][assetId] = true;
     }
 
     function mintPokemon(

@@ -121,8 +121,30 @@ describe("PokemonsFactory", function () {
   });
 
   describe("evolvePokemon", function () {
+    it("Should fail to evolve from Pikachu to Raichu (ERC20: burn amount exceeds balance)", async function () {
+      await expect(pokemonsFactory.connect(bob).evolvePokemon(1, 0))
+        .to.be.revertedWith("ERC20: burn amount exceeds balance");
+    });
+
+    it("Should fail to evolve from Pikachu to Raichu (Pokemons: no available evolutions)", async function () {
+      await expect(pokemonsFactory.connect(bob).evolvePokemon(10, 0))
+        .to.be.revertedWith("Pokemons: no available evolutions");
+    });
+
+    it("Should fail to evolve from Pikachu to Raichu (Pokemons: no available evolutions)", async function () {
+      await expect(pokemonsFactory.connect(bob).evolvePokemon(9, 0))
+        .to.be.revertedWith("Pokemons: no available evolutions");
+    });
+
     it("Should evolve from Pikachu to Raichu properly", async function () {
-      
+      await pokemonsFactory.connect(bob).getLevels(1000);
+      await pokemonsFactory.connect(bob).evolvePokemon(1, 0);
+
+      const balanceOfPikachu = await pokemons.balanceOf(bob.address, 1);
+      const balanceOfRaichu = await pokemons.balanceOf(bob.address, 2);
+
+      expect(balanceOfPikachu).to.equal(BigNumber.from("0"));
+      expect(balanceOfRaichu).to.equal(BigNumber.from("1"));
     });
   });
 });
