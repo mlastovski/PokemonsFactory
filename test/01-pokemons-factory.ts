@@ -127,6 +127,15 @@ describe("PokemonsFactory", function () {
     });
   });
 
+  describe("supportsInterface", function () {
+    it("Should return a bool indicating whether the interface is supported", async function () {
+      expect(await stones.supportsInterface("0x70a08231"))
+        .to.be.a('boolean');
+      expect(await pokemons.supportsInterface("0x70a08231"))
+        .to.be.a('boolean');
+    });
+  });
+
   describe("evolvePokemon", function () {
     it("Should fail to evolve from Pikachu to Raichu (ERC20: burn amount exceeds balance)", async function () {
       await expect(pokemonsFactory.connect(bob).evolvePokemon(1, 0))

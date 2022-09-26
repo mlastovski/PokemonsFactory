@@ -70,7 +70,7 @@ contract Pokemons is ERC1155, AccessControl {
         returns (uint256, uint256) 
     {
         require(
-            evolutionAvailable[pokemonId][assetId] == true, 
+            evolutionAvailable[pokemonId][assetId] && assetId < 5, 
             "Pokemons: no available evolutions"
         );
 
@@ -85,10 +85,8 @@ contract Pokemons is ERC1155, AccessControl {
             return (iceEvolutions[pokemonId], 1);
         } else if (assetId == 3) {
             return (moonEvolutions[pokemonId], 1);
-        } else if (assetId == 4) {
-            return (fireEvolutions[pokemonId], 1);
         } else {
-            return (0, 0);
+            return (fireEvolutions[pokemonId], 1);
         }
     }
 
@@ -118,7 +116,7 @@ contract Pokemons is ERC1155, AccessControl {
             iceEvolutions[currentPokemonId] = newPokemonId;
         } else if (assetId == 3) {
             moonEvolutions[currentPokemonId] = newPokemonId;
-        } else if (assetId == 4) {
+        } else {
             fireEvolutions[currentPokemonId] = newPokemonId;
         }
 
