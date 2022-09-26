@@ -57,19 +57,19 @@ contract Pokemons is ERC1155, AccessControl {
     mapping(uint256 => mapping(uint256 => bool)) evolutionAvailable; 
 
     /// @dev Pokemon Id -> `LevelEvolution` struct.
-    mapping(uint256 => LevelEvolution) levelEvolutions;
+    mapping(uint256 => LevelEvolution) public levelEvolutions;
 
     /// @dev Pokemon Id -> New pokemon Id after the evolution via THUNDER stone. 
-    mapping(uint256 => uint256) thunderEvolutions;
+    mapping(uint256 => uint256) public thunderEvolutions;
 
     /// @dev Pokemon Id -> New pokemon Id after the evolution via ICE stone. 
-    mapping(uint256 => uint256) iceEvolutions;
+    mapping(uint256 => uint256) public iceEvolutions;
 
     /// @dev Pokemon Id -> New pokemon Id after the evolution via MOON stone. 
-    mapping(uint256 => uint256) moonEvolutions;
+    mapping(uint256 => uint256) public moonEvolutions;
 
     /// @dev Pokemon Id -> New pokemon Id after the evolution via FIRE stone. 
-    mapping(uint256 => uint256) fireEvolutions;
+    mapping(uint256 => uint256) public fireEvolutions;
 
     /// @dev Grants an admin role to the contract creator. Creates evolution options.
     /// @param _ipfsLocation A string with the IPFS location of token assets.
