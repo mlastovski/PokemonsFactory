@@ -8,4 +8,6 @@ interface IPokemons is IERC1155 {
   function mintPokemon(address to, uint256 id) external;
 
   function burnPokemon(address from, uint256 id) external;
+
+  function getEvolution(uint256 pokemonId, uint256 assetId) external view returns (uint256, uint256);
 }

@@ -36,15 +36,23 @@ contract PokemonsFactory is AccessControl, VRFConsumerBaseV2 {
         uint256 randomNum, 
         address to
     );
-    // address public levelAddress;
-    // address public stonesAddress;
-    // address public pokemonsAddress;
 
-    // Events
-    // on bought levels
-    // on new pokemon minted
-    // on stone minted
-    // on evolution
+    event LevelsBought(
+        address buyer,
+        uint256 amount
+    );
+
+    event StoneBought(
+        address buyer,
+        uint256 id
+    );
+
+    event PokemonEvolved(
+        address owner,
+        uint256 oldPokemonId,
+        uint256 newPokemonId, 
+        uint256 assetUsed
+    );
 
     constructor(
         address _levelAddress,
@@ -98,17 +106,42 @@ contract PokemonsFactory is AccessControl, VRFConsumerBaseV2 {
         require(amount > 0, "Insufficient amount");
 
         uint256 fullAmount = amount * 1e18;
-
         level.mintLevel(msg.sender, fullAmount);
+
+        emit LevelsBought(msg.sender, fullAmount);
     }
 
     function getStone(uint256 id) external {
         require(id > 0 && id <= 4, "Wrong id");
 
         stones.mintStone(msg.sender, id);
+
+        emit StoneBought(msg.sender, id);
     }
 
-    function evolvePokemon() external {
+    function evolvePokemon(
+        uint256 currentPokemonId, 
+        uint256 assetId
+    ) 
+        external 
+    {
+        (uint256 newId, uint256 price) = pokemons.getEvolution(
+            currentPokemonId, 
+            assetId
+        );
 
+        price > 1 
+            ? level.burnLevel(msg.sender, price) 
+            : stones.burnStone(msg.sender, assetId);
+        
+        pokemons.burnPokemon(msg.sender, currentPokemonId);
+        pokemons.mintPokemon(msg.sender, newId);
+
+        emit PokemonEvolved(
+            msg.sender, 
+            currentPokemonId, 
+            newId, 
+            assetId
+        );
     }
 }

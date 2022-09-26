@@ -119,4 +119,10 @@ describe("PokemonsFactory", function () {
       };
     });
   });
+
+  describe("evolvePokemon", function () {
+    it("Should evolve from Pikachu to Raichu properly", async function () {
+      
+    });
+  });
 });
