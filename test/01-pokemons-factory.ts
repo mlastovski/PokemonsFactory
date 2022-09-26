@@ -4,7 +4,6 @@ import { Contract, ContractFactory, BigNumber } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/dist/src/signer-with-address";
 import { parseEther } from "ethers/lib/utils";
 
-// TODO: events coverage
 describe("PokemonsFactory", function () {
   let Level: ContractFactory;
   let level: Contract;
