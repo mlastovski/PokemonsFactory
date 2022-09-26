@@ -105,7 +105,7 @@ contract Pokemons is ERC1155, AccessControl {
             currentPokemonId < 10 && 
             newPokemonId < 10 && 
             assetId < 5,
-            "Wrong input data"
+            "Pokemons: wrong input data"
         );
 
         if (assetId == 0) {

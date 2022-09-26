@@ -99,11 +99,6 @@ describe("PokemonsFactory", function () {
       const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
 
       await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
-
-      for (let id = 1; id < 10; id++) {
-        const balance = await pokemons.balanceOf(alice.address, id);
-        console.log(balance);
-      };
     });
 
     it("Should mint a random Pokemon to bob properly", async function () {
@@ -112,11 +107,23 @@ describe("PokemonsFactory", function () {
       const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
 
       await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+  });
 
-      for (let id = 1; id < 10; id++) {
-        const balance = await pokemons.balanceOf(bob.address, id);
-        console.log(balance);
-      };
+  describe("modifyEvolution", function () {
+    it("Should fail to modify an evolution (Pokemons: wrong input data)", async function () {
+      await expect(pokemons.modifyEvolution(10, 10, 5, 0))
+        .to.be.revertedWith("Pokemons: wrong input data");
+    });
+  });
+
+  describe("uri", function () {
+    it("Should return correct NFT metadata", async function () {
+      const pikachuUri = "ipfs://bafybeigzd63bbd725waoem5uexjnxfoedjecf7q5b3qt3zwxm6zb4gl6a4/1.json";
+      const thunderUri = "ipfs://bafybeia7lxsg6ne457glpcilj24maq2lssgf4m5jaallqqqpzwl6kicpky/1.json";
+
+      expect(await pokemons.uri(1)).to.equal(pikachuUri);
+      expect(await stones.uri(1)).to.equal(thunderUri);
     });
   });
 
@@ -145,6 +152,211 @@ describe("PokemonsFactory", function () {
 
       expect(balanceOfPikachu).to.equal(BigNumber.from("0"));
       expect(balanceOfRaichu).to.equal(BigNumber.from("1"));
+    });
+
+    it("Should evolve from Raichu to Ninetales properly", async function () {
+      await pokemonsFactory.connect(bob).evolvePokemon(2, 0);
+
+      const balanceOfRaichu = await pokemons.balanceOf(bob.address, 2);
+      const balanceOfNinetales = await pokemons.balanceOf(bob.address, 3);
+
+      expect(balanceOfRaichu).to.equal(BigNumber.from("0"));
+      expect(balanceOfNinetales).to.equal(BigNumber.from("1"));
+    });
+
+    it("Should fail evolve from Ninetales to Staryu using ICE stone (ERC1155: burn amount exceeds balance)", async function () {
+      await expect(pokemonsFactory.connect(bob).evolvePokemon(3, 2))
+        .to.be.revertedWith("ERC1155: burn amount exceeds balance");
+    });
+
+    it("Should evolve from Ninetales to Staryu using ICE stone properly", async function () {
+      await pokemonsFactory.connect(bob).getStone(1);
+      await pokemonsFactory.connect(bob).getStone(2);
+      await pokemonsFactory.connect(bob).getStone(3);
+      await pokemonsFactory.connect(bob).getStone(4);
+
+      await pokemonsFactory.connect(bob).evolvePokemon(3, 2);
+
+      const balanceOfNinetales = await pokemons.balanceOf(bob.address, 3);
+      const balanceOfStaryu = await pokemons.balanceOf(bob.address, 9);
+
+      expect(balanceOfNinetales).to.equal(BigNumber.from("0"));
+      expect(balanceOfStaryu).to.equal(BigNumber.from("1"));
+    });
+
+    it("Should evolve from Staryu to Starmie using FIRE stone properly", async function () {
+      await pokemonsFactory.connect(bob).evolvePokemon(9, 4);
+
+      const balanceOfStaryu = await pokemons.balanceOf(bob.address, 9);
+      const balanceOfStarmie = await pokemons.balanceOf(bob.address, 8);
+
+      expect(balanceOfStaryu).to.equal(BigNumber.from("0"));
+      expect(balanceOfStarmie).to.equal(BigNumber.from("1"));
+    });
+  });
+
+  describe("Minting random pokemons until bob gets a Vulpix", function () {
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+
+    it("Should mint a random Pokemon to bob properly", async function () {
+      const tx = await pokemonsFactory.connect(bob).getRandomPokemon();
+      const { events } = await tx.wait();
+      const [requestId] = events.filter((x: { event: string; }) => x.event === "RequestedRandomness")[0].args;
+
+      await hardhatVrfCoordinatorV2Mock.fulfillRandomWords(requestId, pokemonsFactory.address);
+    });
+  });
+
+  describe("evolvePokemon", function () {
+    it("Should evolve from Vulpix to Bellossom using THUNDER properly", async function () {
+      await pokemonsFactory.connect(bob).evolvePokemon(4, 1);
+
+      const balanceOfVulpix = await pokemons.balanceOf(bob.address, 4);
+      const balanceOfBellossom = await pokemons.balanceOf(bob.address, 5);
+
+      expect(balanceOfVulpix).to.equal(BigNumber.from("0"));
+      expect(balanceOfBellossom).to.equal(BigNumber.from("3"));
+    });
+
+    it("Should evolve from Bellossom to Gloom properly", async function () {
+      await pokemonsFactory.connect(bob).evolvePokemon(5, 0);
+
+      const balanceOfBellossom = await pokemons.balanceOf(bob.address, 5);
+      const balanceOfGloom = await pokemons.balanceOf(bob.address, 6);
+
+      expect(balanceOfBellossom).to.equal(BigNumber.from("2"));
+      expect(balanceOfGloom).to.equal(BigNumber.from("1"));
+    });
+
+    it("Should evolve from Gloom to Vileplume using MOON properly", async function () {
+      await pokemonsFactory.connect(bob).evolvePokemon(6, 3);
+
+      const balanceOfGloom = await pokemons.balanceOf(bob.address, 6);
+      const balanceOfVileplume = await pokemons.balanceOf(bob.address, 7);
+
+      expect(balanceOfGloom).to.equal(BigNumber.from("0"));
+      expect(balanceOfVileplume).to.equal(BigNumber.from("3"));
+    });
+
+    it("Should evolve from Gloom to Starmie using FIRE properly", async function () {
+      await pokemonsFactory.connect(alice).getStone(4);
+      await pokemonsFactory.connect(alice).evolvePokemon(6, 4);
+
+      const balanceOfGloom = await pokemons.balanceOf(alice.address, 6);
+      const balanceOfStarmie = await pokemons.balanceOf(alice.address, 8);
+
+      expect(balanceOfGloom).to.equal(BigNumber.from("0"));
+      expect(balanceOfStarmie).to.equal(BigNumber.from("1"));
     });
   });
 });
