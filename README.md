@@ -47,6 +47,20 @@ These are:
 - `ALCHEMY_MUMBAI` - your Alchemy.io API link for Polygon mumbai test network;
 - `POLYGONSCAN_API_KEY` - you Polygonscan API key.
 
+You should be all set :)
+
+### Running tests
+
+To run unit tests:
+```console
+$ npx hardhat test
+```
+
+Solidity-coverage:
+```console
+$ npx hardhat coverage
+```
+
 ### Possible evolutions
 
 - Pikachu → 20 levels = Raichu
