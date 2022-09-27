@@ -20,6 +20,44 @@ With this project you can mint yourself a random Pokemon and evolve it using one
 - Function `getRandomPokemon()` in `PokemonsFactory.sol` allows you to mint a Pokemon with true randomness, thanks to Chainlink :)
 - Function `modifyEvolution()` in `Pokemons.sol` allows to create/delete/modify evolution options (admin only).
 
+## Usage
+
+### Installation
+
+Clone this repository
+```console
+$ git clone git@github.com:mlastovski/PokemonsFactory.git
+```
+
+Install all dependencies (You need to have Node.js and npm previously installed)
+```console
+$ npm i
+```
+
+Create a .env file in project's root folder (The command below is for MacOs)
+```console
+$ touch .env
+```
+
+In your `.env` file define all the variables that go after `process.env.` in `hardhat.config.ts`.
+
+These are:
+- `MNEMONIC` - your Metamask private key;
+- `ALCHEMY_URL` - your Alchemy.io API link for rinkeby test network;
+- `ALCHEMY_MUMBAI` - your Alchemy.io API link for Polygon mumbai test network;
+- `POLYGONSCAN_API_KEY` - you Polygonscan API key.
+
+### Possible evolutions
+
+- Pikachu → 20 levels = Raichu
+- Raichu → 40 levels = Ninetales
+- Ninetales → ICE = Staryu
+- Staryu → FIRE = Starmie
+- Vulpix → THUNDER = Bellossom
+- Bellossom → 36 levels = Gloom
+- Gloom → MOON = Vileplume
+- Gloom → FIRE = Starmie
+
 # Contracts
 
 ## Level.sol
