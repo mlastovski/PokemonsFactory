@@ -16,7 +16,9 @@ With this project you can mint yourself a random Pokemon and evolve it using one
 - Each contract has a comprehensive NatSpec documentation.
 - Deployment scripts for each contract are stored in scripts/.
 - Unit tests with 100% solidity-coverage are located in test/.
+- Thanks to `VRFCoordinatorV2Mock.sol` there is a possibility to unit-test Chainlink's random number generation functionality in hardhat locally.
 - Function `getRandomPokemon()` in `PokemonsFactory.sol` allows you to mint a Pokemon with true randomness, thanks to Chainlink :)
+- Function `modifyEvolution()` in `Pokemons.sol` allows to create/delete/modify evolution options (admin only).
 
 # Contracts
 
