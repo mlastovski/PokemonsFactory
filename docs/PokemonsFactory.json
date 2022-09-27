@@ -1,0 +1,337 @@
+{
+    "methods": {
+        "DEFAULT_ADMIN_ROLE()": {
+            "stateMutability": "view",
+            "code": "function DEFAULT_ADMIN_ROLE() external view returns (bytes32)",
+            "inputs": {},
+            "outputs": {
+                "_0": {
+                    "type": "bytes32"
+                }
+            }
+        },
+        "evolvePokemon(uint256,uint256)": {
+            "stateMutability": "nonpayable",
+            "code": "function evolvePokemon(uint256 currentPokemonId, uint256 assetId) external nonpayable",
+            "inputs": {
+                "currentPokemonId": {
+                    "type": "uint256",
+                    "description": "Id of the Pokemon token that you own."
+                },
+                "assetId": {
+                    "type": "uint256",
+                    "description": "Id of the asset token you want to spend for the evolution.        "
+                }
+            },
+            "outputs": {},
+            "notice": "Evolves your Pokemon.",
+            "details": "Checks if evolution by given `currentPokemonId` & `assetId` exists.       If price is greater than 1 -> This is an evolution via Level token.      If price is equal to 1 -> This is an evolution via Stone token.       Price is always greater than zero. Burns your current Pokemon token       as well as the asset token provided for the evolution. Mints a new Pokemon token.   "
+        },
+        "getLevels(uint256)": {
+            "stateMutability": "nonpayable",
+            "code": "function getLevels(uint256 amount) external nonpayable",
+            "inputs": {
+                "amount": {
+                    "type": "uint256",
+                    "description": "Amount of Level tokens to mint."
+                }
+            },
+            "outputs": {},
+            "notice": "Mints `amount` of levels to caller's address."
+        },
+        "getRandomPokemon()": {
+            "stateMutability": "nonpayable",
+            "code": "function getRandomPokemon() external nonpayable returns (uint256 requestId)",
+            "inputs": {},
+            "outputs": {
+                "requestId": {
+                    "type": "uint256"
+                }
+            },
+            "notice": "Mints a random Pokemon.",
+            "details": "Returns the request ID which is sent to the Coordinator contract."
+        },
+        "getRoleAdmin(bytes32)": {
+            "stateMutability": "view",
+            "code": "function getRoleAdmin(bytes32 role) external view returns (bytes32)",
+            "inputs": {
+                "role": {
+                    "type": "bytes32"
+                }
+            },
+            "outputs": {
+                "_0": {
+                    "type": "bytes32"
+                }
+            },
+            "details": "Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}."
+        },
+        "getStone(uint256)": {
+            "stateMutability": "nonpayable",
+            "code": "function getStone(uint256 id) external nonpayable",
+            "inputs": {
+                "id": {
+                    "type": "uint256",
+                    "description": "Stone id. 1 = THUNDER, 2 = ICE, 3 = MOON, 4 = FIRE."
+                }
+            },
+            "outputs": {},
+            "notice": "Mints the selected Stone token by `id` to caller's address."
+        },
+        "grantRole(bytes32,address)": {
+            "stateMutability": "nonpayable",
+            "code": "function grantRole(bytes32 role, address account) external nonpayable",
+            "inputs": {
+                "role": {
+                    "type": "bytes32"
+                },
+                "account": {
+                    "type": "address"
+                }
+            },
+            "outputs": {},
+            "details": "Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleGranted} event."
+        },
+        "hasRole(bytes32,address)": {
+            "stateMutability": "view",
+            "code": "function hasRole(bytes32 role, address account) external view returns (bool)",
+            "inputs": {
+                "role": {
+                    "type": "bytes32"
+                },
+                "account": {
+                    "type": "address"
+                }
+            },
+            "outputs": {
+                "_0": {
+                    "type": "bool"
+                }
+            },
+            "details": "Returns `true` if `account` has been granted `role`."
+        },
+        "rawFulfillRandomWords(uint256,uint256[])": {
+            "stateMutability": "nonpayable",
+            "code": "function rawFulfillRandomWords(uint256 requestId, uint256[] randomWords) external nonpayable",
+            "inputs": {
+                "requestId": {
+                    "type": "uint256"
+                },
+                "randomWords": {
+                    "type": "uint256[]"
+                }
+            },
+            "outputs": {}
+        },
+        "renounceRole(bytes32,address)": {
+            "stateMutability": "nonpayable",
+            "code": "function renounceRole(bytes32 role, address account) external nonpayable",
+            "inputs": {
+                "role": {
+                    "type": "bytes32"
+                },
+                "account": {
+                    "type": "address"
+                }
+            },
+            "outputs": {},
+            "details": "Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been revoked `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`. May emit a {RoleRevoked} event."
+        },
+        "requestToSender(uint256)": {
+            "stateMutability": "view",
+            "code": "function requestToSender(uint256) external view returns (address)",
+            "inputs": {
+                "_0": {
+                    "type": "uint256"
+                }
+            },
+            "outputs": {
+                "_0": {
+                    "type": "address"
+                }
+            },
+            "details": "Maps request id to the caller's address.       Set to public for transparency purposes. "
+        },
+        "revokeRole(bytes32,address)": {
+            "stateMutability": "nonpayable",
+            "code": "function revokeRole(bytes32 role, address account) external nonpayable",
+            "inputs": {
+                "role": {
+                    "type": "bytes32"
+                },
+                "account": {
+                    "type": "address"
+                }
+            },
+            "outputs": {},
+            "details": "Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleRevoked} event."
+        },
+        "supportsInterface(bytes4)": {
+            "stateMutability": "view",
+            "code": "function supportsInterface(bytes4 interfaceId) external view returns (bool)",
+            "inputs": {
+                "interfaceId": {
+                    "type": "bytes4"
+                }
+            },
+            "outputs": {
+                "_0": {
+                    "type": "bool"
+                }
+            },
+            "details": "See {IERC165-supportsInterface}."
+        }
+    },
+    "events": {
+        "LevelsBought": {
+            "code": "event LevelsBought(address buyer, uint256 amount)",
+            "inputs": {
+                "buyer": {
+                    "type": "address",
+                    "indexed": false
+                },
+                "amount": {
+                    "type": "uint256",
+                    "indexed": false
+                }
+            },
+            "details": "Emits on `getLevels` function call."
+        },
+        "PokemonEvolved": {
+            "code": "event PokemonEvolved(address owner, uint256 oldPokemonId, uint256 newPokemonId, uint256 assetUsed)",
+            "inputs": {
+                "owner": {
+                    "type": "address",
+                    "indexed": false
+                },
+                "oldPokemonId": {
+                    "type": "uint256",
+                    "indexed": false
+                },
+                "newPokemonId": {
+                    "type": "uint256",
+                    "indexed": false
+                },
+                "assetUsed": {
+                    "type": "uint256",
+                    "indexed": false
+                }
+            },
+            "details": "Emits on `evolvePokemon` function call."
+        },
+        "ReceivedRandomness": {
+            "code": "event ReceivedRandomness(uint256 requestId, uint256 randomNum, address to)",
+            "inputs": {
+                "requestId": {
+                    "type": "uint256",
+                    "indexed": false
+                },
+                "randomNum": {
+                    "type": "uint256",
+                    "indexed": false
+                },
+                "to": {
+                    "type": "address",
+                    "indexed": false
+                }
+            },
+            "details": "Emits on `fulfillRandomWords` function call."
+        },
+        "RequestedRandomness": {
+            "code": "event RequestedRandomness(uint256 requestId, address from)",
+            "inputs": {
+                "requestId": {
+                    "type": "uint256",
+                    "indexed": false
+                },
+                "from": {
+                    "type": "address",
+                    "indexed": false
+                }
+            },
+            "details": "Emits on `getRandomPokemon` function call."
+        },
+        "RoleAdminChanged": {
+            "code": "event RoleAdminChanged(bytes32 indexed role, bytes32 indexed previousAdminRole, bytes32 indexed newAdminRole)",
+            "inputs": {
+                "role": {
+                    "type": "bytes32",
+                    "indexed": true
+                },
+                "previousAdminRole": {
+                    "type": "bytes32",
+                    "indexed": true
+                },
+                "newAdminRole": {
+                    "type": "bytes32",
+                    "indexed": true
+                }
+            }
+        },
+        "RoleGranted": {
+            "code": "event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender)",
+            "inputs": {
+                "role": {
+                    "type": "bytes32",
+                    "indexed": true
+                },
+                "account": {
+                    "type": "address",
+                    "indexed": true
+                },
+                "sender": {
+                    "type": "address",
+                    "indexed": true
+                }
+            }
+        },
+        "RoleRevoked": {
+            "code": "event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender)",
+            "inputs": {
+                "role": {
+                    "type": "bytes32",
+                    "indexed": true
+                },
+                "account": {
+                    "type": "address",
+                    "indexed": true
+                },
+                "sender": {
+                    "type": "address",
+                    "indexed": true
+                }
+            }
+        },
+        "StoneBought": {
+            "code": "event StoneBought(address buyer, uint256 id)",
+            "inputs": {
+                "buyer": {
+                    "type": "address",
+                    "indexed": false
+                },
+                "id": {
+                    "type": "uint256",
+                    "indexed": false
+                }
+            },
+            "details": "Emits on `getStone` function call."
+        }
+    },
+    "errors": {
+        "OnlyCoordinatorCanFulfill": {
+            "code": "error OnlyCoordinatorCanFulfill(address have, address want)",
+            "inputs": {
+                "have": {
+                    "type": "address"
+                },
+                "want": {
+                    "type": "address"
+                }
+            }
+        }
+    },
+    "path": "",
+    "title": "PokemonsFactory project's main contract.",
+    "author": "mlastovski",
+    "name": "PokemonsFactory"
+}

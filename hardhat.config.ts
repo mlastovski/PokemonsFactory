@@ -8,6 +8,7 @@ import "hardhat-gas-reporter";
 import "solidity-coverage";
 import "hardhat-contract-sizer";
 import "hardhat-docgen";
+import "@primitivefi/hardhat-dodoc";
 
 dotenv.config();
 
@@ -76,14 +77,27 @@ const config: HardhatUserConfig = {
   },
 
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: process.env.POLYGONSCAN_API_KEY,
   },
 
   docgen: {
     path: './docs',
     clear: true,
+    runOnCompile: false,
+  },
+  
+  dodoc: {
     runOnCompile: true,
-  } 
+    debugMode: true,
+    exclude: [
+      "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "node_modules/@openzeppelin/contracts/access/AccessControl.sol",
+      "node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
+      "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+      "node_modules/@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol",
+      "node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol",
+    ]
+  }
 };
 
 export default config;

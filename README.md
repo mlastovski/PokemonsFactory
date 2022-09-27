@@ -1,46 +1,240 @@
-# Advanced Sample Hardhat Project
+# ☢️ Pokemons Factory
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+# Description
 
-The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
+Pokemons Factory is an NFT sandbox. I created this project as a test task for a solidity smart contract junior developer position. This is an example for me of how to implement in-game currency and cosmetics/collectibles with fungible & non-fungible tokens.
 
-Try running some of the following tasks:
+With this project you can mint yourself a random Pokemon and evolve it using one of the required assets if you want obviously :)
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-npx hardhat help
-REPORT_GAS=true npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/deploy.ts
-TS_NODE_FILES=true npx ts-node scripts/deploy.ts
-npx eslint '**/*.{js,ts}'
-npx eslint '**/*.{js,ts}' --fix
-npx prettier '**/*.{json,sol,md}' --check
-npx prettier '**/*.{json,sol,md}' --write
-npx solhint 'contracts/**/*.sol'
-npx solhint 'contracts/**/*.sol' --fix
+# Contracts
+
+## Level.sol
+
+> An ERC-20 compliant token with some custom functionality.
+
+
+
+
+
+## Methods
+
+### DEFAULT_ADMIN_ROLE
+
+```solidity
+function DEFAULT_ADMIN_ROLE() external view returns (bytes32)
 ```
 
-# Etherscan verification
+*Default admin role. Assigned to the contract creator on deployment.*
 
-To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
 
-In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
+### MANIPULATOR_ROLE
 
-```shell
-hardhat run --network ropsten scripts/deploy.ts
+```solidity
+function MANIPULATOR_ROLE() external view returns (bytes32)
 ```
 
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
 
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
+
+*Role that will be able to call `mintLevel` and `burnLevel`.*
+
+
+### burnLevel
+
+```solidity
+function burnLevel(address from, uint256 amount) external nonpayable
 ```
 
-# Performance optimizations
 
-For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
+
+*Burn `amount` of tokens from the address `from`.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| from | address | Address to burn tokens from. |
+| amount | uint256 | Amount of tokens to burn. |
+
+### initialize
+
+```solidity
+function initialize(address target) external nonpayable
+```
+
+
+
+*Grants role `MANIPULATOR_ROLE` to the address `target`.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| target | address | Address to give role to. |
+
+### mintLevel
+
+```solidity
+function mintLevel(address to, uint256 amount) external nonpayable
+```
+
+
+
+*Mint `amount` of tokens to the address `to`.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| to | address | Address to mint tokens to. |
+| amount | uint256 | Amount of tokens to mint. |
+
+## Stones.sol
+
+> An ERC-1155 compliant token for the PokemonsFactory project.
+
+
+
+
+
+## Methods
+
+### DEFAULT_ADMIN_ROLE
+
+```solidity
+function DEFAULT_ADMIN_ROLE() external view returns (bytes32)
+```
+
+
+
+
+
+
+### MANIPULATOR_ROLE
+
+```solidity
+function MANIPULATOR_ROLE() external view returns (bytes32)
+```
+
+
+
+*Role that will be able to call `mintStone` and `burnStone`.*
+
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | bytes32 | undefined |
+
+### burnStone
+
+```solidity
+function burnStone(address from, uint256 id) external nonpayable
+```
+
+
+
+*Burn tokens from `id` collection from the address `from`.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| from | address | Address to burn tokens from. |
+| id | uint256 | Id of the collection. |
+
+### initialize
+
+```solidity
+function initialize(address target) external nonpayable
+```
+
+
+
+*Grants role `MANIPULATOR_ROLE` to the address `target`.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| target | address | Address to give role to. |
+
+### ipfsLocation
+
+```solidity
+function ipfsLocation() external view returns (string)
+```
+
+
+
+*A string with the IPFS location of token assets.*
+
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | string | undefined |
+
+### mintStone
+
+```solidity
+function mintStone(address to, uint256 id) external nonpayable
+```
+
+
+
+*Mint tokens from `id` collection to the address `to`.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| to | address | Address to mint tokens to. |
+| id | uint256 | Id of the collection. |
+
+### supportsInterface
+
+```solidity
+function supportsInterface(bytes4 interfaceId) external view returns (bool)
+```
+
+
+
+*Used to resolve the conflict when inheriting from both      AccessControl and ERC1155.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| interfaceId | bytes4 | undefined |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | bool | undefined |
+
+### uri
+
+```solidity
+function uri(uint256 _tokenId) external view returns (string)
+```
+
+Sets NFT matadata (e.g. for OpenSea).
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| _tokenId | uint256 | Token&#39;s ID. |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | string | A string with NFT metadata.  |
+
+

@@ -1,0 +1,328 @@
+{
+    "methods": {
+        "BASE_FEE()": {
+            "stateMutability": "view",
+            "code": "function BASE_FEE() external view returns (uint96)",
+            "inputs": {},
+            "outputs": {
+                "_0": {
+                    "type": "uint96"
+                }
+            }
+        },
+        "GAS_PRICE_LINK()": {
+            "stateMutability": "view",
+            "code": "function GAS_PRICE_LINK() external view returns (uint96)",
+            "inputs": {},
+            "outputs": {
+                "_0": {
+                    "type": "uint96"
+                }
+            }
+        },
+        "acceptSubscriptionOwnerTransfer(uint64)": {
+            "stateMutability": "pure",
+            "code": "function acceptSubscriptionOwnerTransfer(uint64 _subId) external pure",
+            "inputs": {
+                "_subId": {
+                    "type": "uint64"
+                }
+            },
+            "outputs": {}
+        },
+        "addConsumer(uint64,address)": {
+            "stateMutability": "pure",
+            "code": "function addConsumer(uint64 _subId, address _consumer) external pure",
+            "inputs": {
+                "_subId": {
+                    "type": "uint64"
+                },
+                "_consumer": {
+                    "type": "address"
+                }
+            },
+            "outputs": {}
+        },
+        "cancelSubscription(uint64,address)": {
+            "stateMutability": "nonpayable",
+            "code": "function cancelSubscription(uint64 _subId, address _to) external nonpayable",
+            "inputs": {
+                "_subId": {
+                    "type": "uint64"
+                },
+                "_to": {
+                    "type": "address"
+                }
+            },
+            "outputs": {}
+        },
+        "createSubscription()": {
+            "stateMutability": "nonpayable",
+            "code": "function createSubscription() external nonpayable returns (uint64 _subId)",
+            "inputs": {},
+            "outputs": {
+                "_subId": {
+                    "type": "uint64",
+                    "description": "- A unique subscription id."
+                }
+            },
+            "notice": "Create a VRF subscription.",
+            "details": "You can manage the consumer set dynamically with addConsumer/removeConsumer.Note to fund the subscription, use transferAndCall. For exampleLINKTOKEN.transferAndCall(address(COORDINATOR),amount,abi.encode(subId));"
+        },
+        "fulfillRandomWords(uint256,address)": {
+            "stateMutability": "nonpayable",
+            "code": "function fulfillRandomWords(uint256 _requestId, address _consumer) external nonpayable",
+            "inputs": {
+                "_requestId": {
+                    "type": "uint256",
+                    "description": "the request to fulfill"
+                },
+                "_consumer": {
+                    "type": "address",
+                    "description": "the VRF randomness consumer to send the result to"
+                }
+            },
+            "outputs": {},
+            "notice": "fulfillRandomWords fulfills the given request, sending the random words to the suppliedconsumer.",
+            "details": "This mock uses a simplified formula for calculating payment amount and gas usage, and doesnot account for all edge cases handled in the real VRF coordinator. When making requestsagainst the real coordinator a small amount of additional LINK is required."
+        },
+        "fundSubscription(uint64,uint96)": {
+            "stateMutability": "nonpayable",
+            "code": "function fundSubscription(uint64 _subId, uint96 _amount) external nonpayable",
+            "inputs": {
+                "_subId": {
+                    "type": "uint64",
+                    "description": "the subscription to fund"
+                },
+                "_amount": {
+                    "type": "uint96",
+                    "description": "the amount to fund"
+                }
+            },
+            "outputs": {},
+            "notice": "fundSubscription allows funding a subscription with an arbitrary amount for testing."
+        },
+        "getRequestConfig()": {
+            "stateMutability": "pure",
+            "code": "function getRequestConfig() external pure returns (uint16, uint32, bytes32[])",
+            "inputs": {},
+            "outputs": {
+                "_0": {
+                    "type": "uint16",
+                    "description": "minimumRequestConfirmations global min for request confirmations"
+                },
+                "_1": {
+                    "type": "uint32",
+                    "description": "maxGasLimit global max for request gas limit"
+                },
+                "_2": {
+                    "type": "bytes32[]",
+                    "description": "s_provingKeyHashes list of registered key hashes"
+                }
+            },
+            "notice": "Get configuration relevant for making requests"
+        },
+        "getSubscription(uint64)": {
+            "stateMutability": "view",
+            "code": "function getSubscription(uint64 _subId) external view returns (uint96 balance, uint64 reqCount, address owner, address[] consumers)",
+            "inputs": {
+                "_subId": {
+                    "type": "uint64"
+                }
+            },
+            "outputs": {
+                "balance": {
+                    "type": "uint96"
+                },
+                "reqCount": {
+                    "type": "uint64"
+                },
+                "owner": {
+                    "type": "address"
+                },
+                "consumers": {
+                    "type": "address[]"
+                }
+            }
+        },
+        "removeConsumer(uint64,address)": {
+            "stateMutability": "pure",
+            "code": "function removeConsumer(uint64 _subId, address _consumer) external pure",
+            "inputs": {
+                "_subId": {
+                    "type": "uint64"
+                },
+                "_consumer": {
+                    "type": "address"
+                }
+            },
+            "outputs": {}
+        },
+        "requestRandomWords(bytes32,uint64,uint16,uint32,uint32)": {
+            "stateMutability": "nonpayable",
+            "code": "function requestRandomWords(bytes32 _keyHash, uint64 _subId, uint16 _minimumRequestConfirmations, uint32 _callbackGasLimit, uint32 _numWords) external nonpayable returns (uint256)",
+            "inputs": {
+                "_keyHash": {
+                    "type": "bytes32"
+                },
+                "_subId": {
+                    "type": "uint64"
+                },
+                "_minimumRequestConfirmations": {
+                    "type": "uint16"
+                },
+                "_callbackGasLimit": {
+                    "type": "uint32"
+                },
+                "_numWords": {
+                    "type": "uint32"
+                }
+            },
+            "outputs": {
+                "_0": {
+                    "type": "uint256"
+                }
+            }
+        },
+        "requestSubscriptionOwnerTransfer(uint64,address)": {
+            "stateMutability": "pure",
+            "code": "function requestSubscriptionOwnerTransfer(uint64 _subId, address _newOwner) external pure",
+            "inputs": {
+                "_subId": {
+                    "type": "uint64"
+                },
+                "_newOwner": {
+                    "type": "address"
+                }
+            },
+            "outputs": {}
+        }
+    },
+    "events": {
+        "RandomWordsFulfilled": {
+            "code": "event RandomWordsFulfilled(uint256 indexed requestId, uint256 outputSeed, uint96 payment, bool success)",
+            "inputs": {
+                "requestId": {
+                    "type": "uint256",
+                    "indexed": true
+                },
+                "outputSeed": {
+                    "type": "uint256",
+                    "indexed": false
+                },
+                "payment": {
+                    "type": "uint96",
+                    "indexed": false
+                },
+                "success": {
+                    "type": "bool",
+                    "indexed": false
+                }
+            }
+        },
+        "RandomWordsRequested": {
+            "code": "event RandomWordsRequested(bytes32 indexed keyHash, uint256 requestId, uint256 preSeed, uint64 indexed subId, uint16 minimumRequestConfirmations, uint32 callbackGasLimit, uint32 numWords, address indexed sender)",
+            "inputs": {
+                "keyHash": {
+                    "type": "bytes32",
+                    "indexed": true
+                },
+                "requestId": {
+                    "type": "uint256",
+                    "indexed": false
+                },
+                "preSeed": {
+                    "type": "uint256",
+                    "indexed": false
+                },
+                "subId": {
+                    "type": "uint64",
+                    "indexed": true
+                },
+                "minimumRequestConfirmations": {
+                    "type": "uint16",
+                    "indexed": false
+                },
+                "callbackGasLimit": {
+                    "type": "uint32",
+                    "indexed": false
+                },
+                "numWords": {
+                    "type": "uint32",
+                    "indexed": false
+                },
+                "sender": {
+                    "type": "address",
+                    "indexed": true
+                }
+            }
+        },
+        "SubscriptionCanceled": {
+            "code": "event SubscriptionCanceled(uint64 indexed subId, address to, uint256 amount)",
+            "inputs": {
+                "subId": {
+                    "type": "uint64",
+                    "indexed": true
+                },
+                "to": {
+                    "type": "address",
+                    "indexed": false
+                },
+                "amount": {
+                    "type": "uint256",
+                    "indexed": false
+                }
+            }
+        },
+        "SubscriptionCreated": {
+            "code": "event SubscriptionCreated(uint64 indexed subId, address owner)",
+            "inputs": {
+                "subId": {
+                    "type": "uint64",
+                    "indexed": true
+                },
+                "owner": {
+                    "type": "address",
+                    "indexed": false
+                }
+            }
+        },
+        "SubscriptionFunded": {
+            "code": "event SubscriptionFunded(uint64 indexed subId, uint256 oldBalance, uint256 newBalance)",
+            "inputs": {
+                "subId": {
+                    "type": "uint64",
+                    "indexed": true
+                },
+                "oldBalance": {
+                    "type": "uint256",
+                    "indexed": false
+                },
+                "newBalance": {
+                    "type": "uint256",
+                    "indexed": false
+                }
+            }
+        }
+    },
+    "errors": {
+        "InsufficientBalance": {
+            "code": "error InsufficientBalance()",
+            "inputs": {}
+        },
+        "InvalidSubscription": {
+            "code": "error InvalidSubscription()",
+            "inputs": {}
+        },
+        "MustBeSubOwner": {
+            "code": "error MustBeSubOwner(address owner)",
+            "inputs": {
+                "owner": {
+                    "type": "address"
+                }
+            }
+        }
+    },
+    "path": "k/contracts/src/v0.8/mocks",
+    "name": "VRFCoordinatorV2Mock"
+}

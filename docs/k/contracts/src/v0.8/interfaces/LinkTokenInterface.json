@@ -1,0 +1,183 @@
+{
+    "methods": {
+        "allowance(address,address)": {
+            "stateMutability": "view",
+            "code": "function allowance(address owner, address spender) external view returns (uint256 remaining)",
+            "inputs": {
+                "owner": {
+                    "type": "address"
+                },
+                "spender": {
+                    "type": "address"
+                }
+            },
+            "outputs": {
+                "remaining": {
+                    "type": "uint256"
+                }
+            }
+        },
+        "approve(address,uint256)": {
+            "stateMutability": "nonpayable",
+            "code": "function approve(address spender, uint256 value) external nonpayable returns (bool success)",
+            "inputs": {
+                "spender": {
+                    "type": "address"
+                },
+                "value": {
+                    "type": "uint256"
+                }
+            },
+            "outputs": {
+                "success": {
+                    "type": "bool"
+                }
+            }
+        },
+        "balanceOf(address)": {
+            "stateMutability": "view",
+            "code": "function balanceOf(address owner) external view returns (uint256 balance)",
+            "inputs": {
+                "owner": {
+                    "type": "address"
+                }
+            },
+            "outputs": {
+                "balance": {
+                    "type": "uint256"
+                }
+            }
+        },
+        "decimals()": {
+            "stateMutability": "view",
+            "code": "function decimals() external view returns (uint8 decimalPlaces)",
+            "inputs": {},
+            "outputs": {
+                "decimalPlaces": {
+                    "type": "uint8"
+                }
+            }
+        },
+        "decreaseApproval(address,uint256)": {
+            "stateMutability": "nonpayable",
+            "code": "function decreaseApproval(address spender, uint256 addedValue) external nonpayable returns (bool success)",
+            "inputs": {
+                "spender": {
+                    "type": "address"
+                },
+                "addedValue": {
+                    "type": "uint256"
+                }
+            },
+            "outputs": {
+                "success": {
+                    "type": "bool"
+                }
+            }
+        },
+        "increaseApproval(address,uint256)": {
+            "stateMutability": "nonpayable",
+            "code": "function increaseApproval(address spender, uint256 subtractedValue) external nonpayable",
+            "inputs": {
+                "spender": {
+                    "type": "address"
+                },
+                "subtractedValue": {
+                    "type": "uint256"
+                }
+            },
+            "outputs": {}
+        },
+        "name()": {
+            "stateMutability": "view",
+            "code": "function name() external view returns (string tokenName)",
+            "inputs": {},
+            "outputs": {
+                "tokenName": {
+                    "type": "string"
+                }
+            }
+        },
+        "symbol()": {
+            "stateMutability": "view",
+            "code": "function symbol() external view returns (string tokenSymbol)",
+            "inputs": {},
+            "outputs": {
+                "tokenSymbol": {
+                    "type": "string"
+                }
+            }
+        },
+        "totalSupply()": {
+            "stateMutability": "view",
+            "code": "function totalSupply() external view returns (uint256 totalTokensIssued)",
+            "inputs": {},
+            "outputs": {
+                "totalTokensIssued": {
+                    "type": "uint256"
+                }
+            }
+        },
+        "transfer(address,uint256)": {
+            "stateMutability": "nonpayable",
+            "code": "function transfer(address to, uint256 value) external nonpayable returns (bool success)",
+            "inputs": {
+                "to": {
+                    "type": "address"
+                },
+                "value": {
+                    "type": "uint256"
+                }
+            },
+            "outputs": {
+                "success": {
+                    "type": "bool"
+                }
+            }
+        },
+        "transferAndCall(address,uint256,bytes)": {
+            "stateMutability": "nonpayable",
+            "code": "function transferAndCall(address to, uint256 value, bytes data) external nonpayable returns (bool success)",
+            "inputs": {
+                "to": {
+                    "type": "address"
+                },
+                "value": {
+                    "type": "uint256"
+                },
+                "data": {
+                    "type": "bytes"
+                }
+            },
+            "outputs": {
+                "success": {
+                    "type": "bool"
+                }
+            }
+        },
+        "transferFrom(address,address,uint256)": {
+            "stateMutability": "nonpayable",
+            "code": "function transferFrom(address from, address to, uint256 value) external nonpayable returns (bool success)",
+            "inputs": {
+                "from": {
+                    "type": "address"
+                },
+                "to": {
+                    "type": "address"
+                },
+                "value": {
+                    "type": "uint256"
+                }
+            },
+            "outputs": {
+                "success": {
+                    "type": "bool"
+                }
+            }
+        }
+    },
+    "events": {},
+    "errors": {},
+    "path": "k/contracts/src/v0.8/interfaces",
+    "name": "LinkTokenInterface"
+}
