@@ -6,6 +6,18 @@ Pokemons Factory is an NFT sandbox. I created this project as a test task for a 
 
 With this project you can mint yourself a random Pokemon and evolve it using one of the required assets if you want obviously :)
 
+## Features
+
+- All smart contracts are verified on Polygonscan Mumbai:
+    - [Level.sol](https://mumbai.polygonscan.com/address/0xf15cc36e2e775af950d4e8db0e61d468afdf1e6b#code)
+    - [Stones.sol](https://mumbai.polygonscan.com/address/0xf9e88a1503a64e24ae9db3d01056a26747e2b718#code)
+    - [Pokemons.sol](https://mumbai.polygonscan.com/address/0x4986e1ad56e1580b70877140b865f45e5af03ebe#code)
+    - [PokemonsFactory.sol](https://mumbai.polygonscan.com/address/0xa39902c5ccd3165c178394b62ffb0470384970c9#code)
+- Each contract has a comprehensive NatSpec documentation.
+- Deployment scripts for each contract are stored in scripts/.
+- Unit tests with 100% solidity-coverage are located in test/.
+- Function `getRandomPokemon()` in `PokemonsFactory.sol` allows you to mint a Pokemon with true randomness, thanks to Chainlink :)
+
 # Contracts
 
 ## Level.sol
