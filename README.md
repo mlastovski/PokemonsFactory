@@ -13,6 +13,10 @@ With this project you can mint yourself a random Pokemon and evolve it using one
     - [Stones.sol](https://mumbai.polygonscan.com/address/0xf9e88a1503a64e24ae9db3d01056a26747e2b718#code)
     - [Pokemons.sol](https://mumbai.polygonscan.com/address/0x4986e1ad56e1580b70877140b865f45e5af03ebe#code)
     - [PokemonsFactory.sol](https://mumbai.polygonscan.com/address/0xa39902c5ccd3165c178394b62ffb0470384970c9#code)
+- Pokemons and Stones collections are listed on OpenSea testnets:
+    - [Pokemons](https://testnets.opensea.io/collection/pokemons-todsckq0od)
+    - [Stones](https://testnets.opensea.io/collection/stones-yd8l57xwmi)
+- Project has an active [Chainlink VRF subscription](https://vrf.chain.link/mumbai/2004). This subscription needs to be funded by LINK tokens so it can continue providing functionality of Chainlink's random.
 - Each contract has a comprehensive NatSpec documentation.
 - Deployment scripts for each contract are stored in scripts/.
 - Unit tests with 100% solidity-coverage are located in test/.
@@ -72,11 +76,14 @@ $ npx hardhat coverage
 - Gloom → MOON = Vileplume
 - Gloom → FIRE = Starmie
 
+## Demo
+![Example screenshot](/utils/readme/coverage.png)
+
 # Contracts
 
-## Level.sol
+## 1️⃣ Level.sol
 
-> An ERC-20 compliant token with some custom functionality.
+> An ERC-20 compliant token with some custom functionality. Used as an asset to evolve Pokemons. `assetId=0`
 
 
 
@@ -112,7 +119,7 @@ function burnLevel(address from, uint256 amount) external nonpayable
 
 
 
-*Burn `amount` of tokens from the address `from`.*
+*Burn `amount` of tokens from the address `from`. only `MANIPULATOR_ROLE()`*
 
 #### Parameters
 
@@ -129,7 +136,7 @@ function initialize(address target) external nonpayable
 
 
 
-*Grants role `MANIPULATOR_ROLE` to the address `target`.*
+*Grants role `MANIPULATOR_ROLE` to the address `target`. `DEFAULT_ADMIN_ROLE()` only*
 
 #### Parameters
 
@@ -145,7 +152,7 @@ function mintLevel(address to, uint256 amount) external nonpayable
 
 
 
-*Mint `amount` of tokens to the address `to`.*
+*Mint `amount` of tokens to the address `to`. only `MANIPULATOR_ROLE()`*
 
 #### Parameters
 
@@ -154,9 +161,9 @@ function mintLevel(address to, uint256 amount) external nonpayable
 | to | address | Address to mint tokens to. |
 | amount | uint256 | Amount of tokens to mint. |
 
-## Stones.sol
+## 2️⃣ Stones.sol
 
-> An ERC-1155 compliant token for the PokemonsFactory project.
+> An ERC-1155 compliant token for the PokemonsFactory project. Used as an asset to evolve Pokemons. There are 4 different stones: `THUNDER (id=1)`; `ICE (id=2)`; `MOON (id=3)`; `FIRE (id=4)`.
 
 
 
@@ -343,10 +350,10 @@ function name() external view returns (string)
 
 
 
-## Pokemons.sol
+## 3️⃣ Pokemons.sol
 
 
-> An ERC-1155 compliant token for the PokemonsFactory project.
+> An ERC-1155 compliant token for the PokemonsFactory project. An actual Pokemons NFT smart contract. Here are their ids: `PIKACHU = 1`; `RAICHU = 2`; `NINETALES = 3`; `VULPIX = 4`; `BELLOSSOM = 5`; `GLOOM = 6`; `VILEPLUME = 7`; `STARMIE = 8`; `STARYU = 9`;
 
 
 
@@ -842,7 +849,7 @@ Sets NFT matadata (e.g. for OpenSea).
 
 
 
-## PokemonsFactory.sol
+## 4️⃣ PokemonsFactory.sol
 
 
 > PokemonsFactory project&#39;s main contract.
