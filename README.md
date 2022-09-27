@@ -277,7 +277,7 @@ function name() external view returns (string)
 
 
 
-## Pokemons
+## Pokemons.sol
 
 
 > An ERC-1155 compliant token for the PokemonsFactory project.
@@ -773,5 +773,238 @@ Sets NFT matadata (e.g. for OpenSea).
 | Name | Type | Description |
 |---|---|---|
 | _0 | string | A string with NFT metadata.  |
+
+
+
+## PokemonsFactory.sol
+
+
+> PokemonsFactory project&#39;s main contract.
+
+
+
+
+
+## Methods
+
+### DEFAULT_ADMIN_ROLE
+
+```solidity
+function DEFAULT_ADMIN_ROLE() external view returns (bytes32)
+```
+
+
+
+
+
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | bytes32 | undefined |
+
+### evolvePokemon
+
+```solidity
+function evolvePokemon(uint256 currentPokemonId, uint256 assetId) external nonpayable
+```
+
+Evolves your Pokemon.
+
+*Checks if evolution by given `currentPokemonId` &amp; `assetId` exists.       If price is greater than 1 -&gt; This is an evolution via Level token.      If price is equal to 1 -&gt; This is an evolution via Stone token.       Price is always greater than zero. Burns your current Pokemon token       as well as the asset token provided for the evolution. Mints a new Pokemon token.   *
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| currentPokemonId | uint256 | Id of the Pokemon token that you own. |
+| assetId | uint256 | Id of the asset token you want to spend for the evolution.         |
+
+### getLevels
+
+```solidity
+function getLevels(uint256 amount) external nonpayable
+```
+
+Mints `amount` of levels to caller&#39;s address.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| amount | uint256 | Amount of Level tokens to mint. |
+
+### getRandomPokemon
+
+```solidity
+function getRandomPokemon() external nonpayable returns (uint256 requestId)
+```
+
+Mints a random Pokemon.
+
+*Returns the request ID which is sent to the Coordinator contract.*
+
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| requestId | uint256 | undefined |
+
+### getStone
+
+```solidity
+function getStone(uint256 id) external nonpayable
+```
+
+Mints the selected Stone token by `id` to caller&#39;s address.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| id | uint256 | Stone id. 1 = THUNDER, 2 = ICE, 3 = MOON, 4 = FIRE. |
+
+### requestToSender
+
+```solidity
+function requestToSender(uint256) external view returns (address)
+```
+
+
+
+*Maps request id to the caller&#39;s address.       Set to public for transparency purposes. *
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | uint256 | undefined |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | address | undefined |
+
+### supportsInterface
+
+```solidity
+function supportsInterface(bytes4 interfaceId) external view returns (bool)
+```
+
+
+
+*See {IERC165-supportsInterface}.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| interfaceId | bytes4 | undefined |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | bool | undefined |
+
+
+
+## Events
+
+### LevelsBought
+
+```solidity
+event LevelsBought(address buyer, uint256 amount)
+```
+
+
+
+*Emits on `getLevels` function call.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| buyer  | address | undefined |
+| amount  | uint256 | undefined |
+
+### PokemonEvolved
+
+```solidity
+event PokemonEvolved(address owner, uint256 oldPokemonId, uint256 newPokemonId, uint256 assetUsed)
+```
+
+
+
+*Emits on `evolvePokemon` function call.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| owner  | address | undefined |
+| oldPokemonId  | uint256 | undefined |
+| newPokemonId  | uint256 | undefined |
+| assetUsed  | uint256 | undefined |
+
+### ReceivedRandomness
+
+```solidity
+event ReceivedRandomness(uint256 requestId, uint256 randomNum, address to)
+```
+
+
+
+*Emits on `fulfillRandomWords` function call.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| requestId  | uint256 | undefined |
+| randomNum  | uint256 | undefined |
+| to  | address | undefined |
+
+### RequestedRandomness
+
+```solidity
+event RequestedRandomness(uint256 requestId, address from)
+```
+
+
+
+*Emits on `getRandomPokemon` function call.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| requestId  | uint256 | undefined |
+| from  | address | undefined |
+
+### StoneBought
+
+```solidity
+event StoneBought(address buyer, uint256 id)
+```
+
+
+
+*Emits on `getStone` function call.*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| buyer  | address | undefined |
+| id  | uint256 | undefined |
+
 
 
